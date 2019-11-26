@@ -1,0 +1,35 @@
+<h1>SVG Vertical Bar Chart</h1>
+<svg width="960" height="500">
+    <g transform="translate(40,20)">
+        <g class="x axis" transform="translate(0,450)">
+            <ng-container *ngFor="let label of xLabels; let i = index" [attr.data-index]="i">
+                <g class="tick" [attr.transform]="'translate(' + (25.5 + (68*i)) + ', 0)'" style="opacity: 1;">
+                    <line y2="6" x2="0"></line>
+                    <text dy=".71em" y="9" x="0" style="text-anchor: middle;">{{label}}</text>
+                </g>
+            </ng-container>
+            <path class="domain" d="M-6,0H0V450H-6"></path>
+        </g>
+        <g class="y axis">
+            <g class="tick" transform="translate(0,450)" style="opacity: 1;">
+                <line x2="-6" y2="0"></line>
+                <text dy=".32em" x="-9" y="0" style="text-anchor: end;">0</text>
+            </g>
+
+            <ng-container *ngFor="let ylabel of yLabels; let j = index" [attr.data-index]="j">
+                <g class="tick" [attr.transform]="'translate(0,' + (414 - (36*j)) + ')'" style="opacity: 1;">
+                    <line x2="-6" y2="0"></line>
+                    <text dy=".32em" x="-9" y="0" style="text-anchor: end;">{{ylabel}}</text>
+                </g>
+            </ng-container>
+            <path class="domain" d="M-6,0H0V450H-6"></path>
+            <text transform="rotate(-90)" y="2" dy=".71em" style="text-anchor: end;">g/dm^3</text>
+        </g>
+
+        <ng-container *ngFor="let bar of bars; let k = index" [attr.data-index]="k">
+            <rect class="bar" [attr.x]="10 + (68*k)" width="31" [attr.y]="450-((7.15*bar))" [attr.height]="(7.15*bar)">
+            </rect>
+        </ng-container>
+
+    </g>
+</svg>
